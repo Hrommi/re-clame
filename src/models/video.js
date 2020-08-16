@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-const pointsSchema = new Schema(
+const pointSchema = new Schema(
   {
     x: { type: Number, required: true },
     y: { type: Number, required: true },
@@ -10,10 +10,11 @@ const pointsSchema = new Schema(
   }
 );
 
-const stepsSchema = new Schema(
+const stepSchema = new Schema(
   {
-    time: { type: Number, required: true },
-    points: [pointsSchema],
+    beginTime: { type: Number, required: true },
+    endTime: { type: Number, required: true },
+    points: [pointSchema],
   },
   {
     _id: false,
@@ -27,7 +28,7 @@ const schema = new Schema(
       height: { type: Number, required: true },
     },
     url: { type: String, required: true },
-    steps: [stepsSchema],
+    steps: [stepSchema],
   },
   { versionKey: false }
 );
