@@ -10,7 +10,7 @@
   let { time, size } = getContext(key);
 
   $: {
-    $time = Math.floor(currentTime);
+    $time = Math.floor(currentTime * 10) / 10;
   }
 
   function handleChangeDuration(e) {
@@ -31,14 +31,16 @@
   };
 
   const format = (seconds) => {
-    if (Number.isNaN(seconds)) {
+    if (seconds === undefined) {
       return '...';
     }
 
-    const formattigMinutes = Math.floor(seconds / 60);
-    const formattigSeconds = String(Math.floor(seconds % 60)).padStart(2, '0');
+    const formattingMinutes = Math.floor(seconds / 60);
+    const formattingSeconds = (seconds % 60)
+      .toFixed(1)
+      .padStart(4, '0');
 
-    return `${formattigMinutes}:${formattigSeconds}`;
+    return `${formattingMinutes}:${formattingSeconds}`;
   };
 
   const onLoadedData = (e) => {
@@ -55,16 +57,14 @@
 
     switch (e.keyCode) {
       case 39: {
-        currentTime = Math.min(currentTime + 1, duration);
+        currentTime = Math.min(currentTime + 0.1, duration);
         break;
       }
       case 37: {
-        currentTime = Math.max(0, currentTime - 1);
+        currentTime = Math.max(0, currentTime - 0.1);
       }
     }
   };
-
-
 </script>
 
 <style lang='scss'>
@@ -127,7 +127,7 @@
   <video
     class='video__player'
     {src}
-    bind:currentTime={currentTime}
+    bind:currentTime
     bind:duration
     bind:paused
     bind:this={player}
