@@ -1,6 +1,8 @@
 <script>
   import { getContext } from 'svelte';
 
+  import { formatTime } from '../../utils/time.js';
+
   export let key;
   export let src;
   let player;
@@ -28,19 +30,6 @@
     } else {
       player.pause();
     }
-  };
-
-  const format = (seconds) => {
-    if (seconds === undefined) {
-      return '...';
-    }
-
-    const formattingMinutes = Math.floor(seconds / 60);
-    const formattingSeconds = (seconds % 60)
-      .toFixed(1)
-      .padStart(4, '0');
-
-    return `${formattingMinutes}:${formattingSeconds}`;
   };
 
   const onLoadedData = (e) => {
@@ -161,5 +150,5 @@
     class='controls__progress'
     on:click={handleChangeDuration}
     value={currentTime / duration || 0} />
-  <div class='controls__time'>{format(currentTime)} / {format(duration)}</div>
+  <div class='controls__time'>{formatTime(currentTime)} / {formatTime(duration)}</div>
 </div>
