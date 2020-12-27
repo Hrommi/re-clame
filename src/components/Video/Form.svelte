@@ -68,10 +68,12 @@
         class:is-danger={!valid}
         bind:value
         type='text'
-        placeholder='link'
+        placeholder='Video link'
       >
       {#if errorMessage}
         <p class='help is-danger'>{errorMessage}</p>
+      {:else}
+        <p class='help'>Example: https://www.w3schools.com/html/mov_bbb.mp4</p>
       {/if}
     </div>
     <div class='control'>
