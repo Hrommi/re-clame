@@ -111,6 +111,9 @@
   </Player>
 
   <div class='actions'>
+    {#if $points.length < 3}
+      <div class="notification">Select area on video</div>
+    {/if}
     {#if errorMessage}
       <div class='notification is-danger'>{errorMessage}</div>
     {/if}
