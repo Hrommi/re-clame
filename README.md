@@ -12,3 +12,8 @@ npm run dev
 ```
 
 Open up [localhost:3000](http://localhost:3000) and start clicking around.
+
+
+### API
+
+Get all saved videos: https://re-clame.herokuapp.com/api/videos
